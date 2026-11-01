@@ -1,0 +1,88 @@
+
+/* Tokyo Night - Wofi */
+
+/* Tokyo Night palette */
+@define-color bg       #1a1b26;
+@define-color bg_dark  #16161e;
+@define-color surface  #24283b;
+@define-color border   #414868;
+@define-color fg       #c0caf5;
+@define-color muted    #565f89;
+@define-color blue     #7aa2f7;
+@define-color cyan     #7dcfff;
+@define-color purple   #bb9af7;
+
+/* Main window */
+window {
+    background-color: rgba(26, 27, 38, 0.7);
+    border: 2px solid @border;
+    border-radius: 16px;
+    color: @fg;
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 13px;
+}   
+
+/* Main layout */
+#outer-box {
+    margin: 12px;
+    padding: 8px;
+    background-color: transparent;
+}
+
+/* Search field */
+#input {
+    margin: 4px 4px 12px 4px;
+    padding: 12px 14px;
+    border: 1px solid @border;
+    border-radius: 10px;
+    background-color: @surface;
+    color: @fg;
+    caret-color: @cyan;
+    box-shadow: none;
+}
+
+#input:focus {
+    border: 1px solid @blue;
+    box-shadow: none;
+}
+
+/* Application list */
+#scroll {
+    margin: 0;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+}
+
+/* Individual application */
+#entry {
+    margin: 3px 2px;
+    padding: 9px 10px;
+    border: 1px solid transparent;
+    border-radius: 9px;
+    background-color: transparent;
+    color: @fg;
+}
+
+/* Selected application */
+#entry:selected {
+    background-color: @surface;
+    border: 1px solid @blue;
+    outline: none;
+    box-shadow: none;
+}
+
+/* Application name */
+#text {
+    margin-left: 8px;
+    color: @fg;
+}
+
+#entry:selected #text {
+    color: @cyan;
+}
+
+/* Application icons */
+#img {
+    margin-right: 8px;
+}
