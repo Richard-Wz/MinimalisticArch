@@ -21,11 +21,11 @@ Singleton {
     readonly property color redHover: "#3b2638"
 
     // Sizes
-    readonly property int barHeight: 34
+    readonly property int barHeight: 36
     readonly property int fontSize: 12
     readonly property int iconSize: 16
     readonly property int radius: 10
 
     // Icon Font
-    readonly property string iconFont: "JetBrainsMono Nerd Font" 
+    readonly property string iconFont: "JetBrainsMono Nerd Font"
 }

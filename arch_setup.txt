@@ -1,0 +1,175 @@
+sudo pacman -Syu
+sudo pacman -S btop discord firefox fastfetch --noconfirm
+
+# Install yay
+sudo pacman -S git base-devel --needed --noconfirm
+git clone https://aur.archlinux.org/yay.git
+cd yay/
+makepkg -si
+yay --version
+
+# Initialise user directories (optional)
+sudo pacman -S xdg-user-dirs --needed --noconfirm
+xdg-user-dirs-update
+
+# Install a text editro (optional)
+sudo pacman -S zed
+
+# Customisation
+sudo pacman -S hypridle hyprlock hyprpaper hyprshot --needed --noconfirm
+cd Downloads/
+git clone https://github.com/Richard-Wz/MinimalisticArch.git
+cp -r $HOME/Downloads/MinimalisticArch/hypr/ $HOME/.config
+SUPER + M (relogin)
+
+# Set wallpaper in hyprpaper.conf
+nano .config/hypr/hyprpaper.conf
+- Edit the directory for the wallpapers
+
+# JetBrains Nerd Font Install
+sudo pacman -S ttf-jetbrains-mono-nerd --noconfirm
+fc-cache -fv
+
+# Kitty customisation
+kitten theme - Tokyo Night theme
+kitten choose-fonts - Jetbrains Mono Nerd Font Mono
+
+# fastfetch
+cp -r $HOME/Downloads/MinimalisticArch/fastfetch $HOME/.config/
+- Edit the logo to your preference
+
+# wofi
+cp -r $HOME/Downloads/MinimalisticArch/wofi $HOME/.config/
+
+# Kew player
+sudo pacman -S --noconfirm kew
+
+# Quickshell
+sudo pacman -S quickshell --noconfirm
+cp -r $HOME/Downloads/MinimalisticArch/quickshell $HOME/.config/
+// clipboard manager
+sudo pacman -S cliphist wl-clipboard
+sudo yay -S bluez-tools
+// If got battery; else just remove the battery icon widget as mini pc power performance based on bios
+sudo pacman -S power-profiles-daemon
+sudo systemctl enable --now power-profiles-daemon.service
+
+# ZSH shell
+sudo pacman -S zsh zsh-autosuggestions zsh-syntax-highlighting
+chsh -s $(which zsh)
+Log out and relogin
+1 -> 0
+echo "source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" >> ~/.zshrc
+echo "source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ~/.zshrc
+source ~/.zshrc
+
+sudo pacman -S starship
+starship preset tokyo-night -o ~/.config/starship.toml
+echo 'eval "$(starship init zsh)"' >> ~/.zshrc
+source ~/.zshrc
+
+cp ~/.config/starship.toml ~/.config/starship.toml.bak
+
+cat << 'EOF' > ~/.config/starship.toml
+# Minimalist Tokyo Night Theme for Starship
+add_newline = false
+
+format = """
+$directory\
+$git_branch\
+$git_status\
+$cmd_duration\
+$character"""
+
+[directory]
+style = "bold #7aa2f7"
+truncation_length = 3
+truncation_symbol = "…/"
+
+[git_branch]
+symbol = " "
+style = "bold #bb9af7"
+format = "[$symbol$branch]($style) "
+
+[git_status]
+style = "bold #e0af68"
+format = "([$all_status$ahead_behind]($style) )"
+
+[cmd_duration]
+min_time = 2_000
+style = "bold #e0af68"
+format = "[$duration]($style) "
+
+[character]
+success_symbol = "[❯](bold #9ece6a)"
+error_symbol = "[❯](bold #f7768e)"
+vimcmd_symbol = "[❮](bold #7dcfff)"
+EOF
+
+# Reflector
+sudo pacman -S --noconfirm reflector
+sudo reflector --latest 10 --sort rate --protocol https --save /etc/pacman.d/mirrorlist
+sudo pacman -Syyu
+
+# Dolphin file mount issue
+sudo nano /etc/udisks2/mount_options.conf
+[defaults]
+ntfs_drivers=ntfs
+sudo systemctl restart udisks2
+
+# OBS studio and Video player VLC
+sudo pacman -S obs-studio --noconfirm --needed
+sudo pacman -S vlc --noconfirm --needed
+sudo pacman -S vlc-plugins-all
+
+# Wifi Set region for wifi to know what radio frequency it can used based on region
+sudo pacman -S wireless-regdb
+sudo nano /etc/conf.d/wireless-regdom
+// uncomment
+WIRELESS_REGDOM="MY"
+
+
+# multilib enable (can enable through installation)
+sudo nano /etc/pacman.conf
+// uncomment
+[multilib]
+Include = /etc/pacman.d/mirrorlist
+// save and run update command
+sudo pacman -Syyu
+
+sudo pacman -S steam
+11 for radeon
+sudo pacman -S --needed mesa lib32-mesa vulkan-radeon lib32-vulkan-radeon
+yay -S protonplus
+sudo pacman -S gamescope
+sudo pacman -S mangohud lib32-mangohud
+
+sudo pacman -S sqlite
+
+DB_PATH="$HOME/.local/share/Steam/steamapps/common/Wuthering Waves/Wuthering Waves Game/Client/Saved/LocalStorage/LocalStorage.db"
+INI_PATH="$HOME/.local/share/Steam/steamapps/common/Wuthering Waves/Wuthering Waves Game/Client/Saved/Config/WindowsNoEditor/GameUserSettings.ini"
+
+echo "=== LocalStorage.db ==="
+sqlite3 "$DB_PATH" "SELECT * FROM LocalStorage WHERE key LIKE '%Frame%' OR key LIKE '%Quality%' OR key LIKE '%Device%';"
+
+echo "=== GameUserSettings.ini ==="
+grep -i "FrameRate" "$INI_PATH"
+
+DB_PATH="$HOME/.local/share/Steam/steamapps/common/Wuthering Waves/Wuthering Waves Game/Client/Saved/LocalStorage/LocalStorage.db"
+INI_PATH="$HOME/.local/share/Steam/steamapps/common/Wuthering Waves/Wuthering Waves Game/Client/Saved/Config/WindowsNoEditor/GameUserSettings.ini"
+
+sqlite3 "$DB_PATH" "
+UPDATE LocalStorage SET value = '2' WHERE key = 'CustomFrameRate';
+UPDATE LocalStorage SET value = '0' WHERE key = 'AutoAdjustImageQuality';
+DROP TRIGGER IF EXISTS prevent_fps_reset;
+CREATE TRIGGER prevent_fps_reset
+AFTER UPDATE OF value ON LocalStorage
+WHEN NEW.key = 'CustomFrameRate' AND NEW.value != '2'
+BEGIN
+    UPDATE LocalStorage SET value = '2' WHERE key = 'CustomFrameRate';
+END;
+"
+
+sed -i 's/FrameRateLimit=.*/FrameRateLimit=60.000000/' "$INI_PATH"
+
+sqlite3 "$DB_PATH" "SELECT * FROM LocalStorage WHERE key = 'CustomFrameRate';" && grep -i "FrameRateLimit" "$INI_PATH"

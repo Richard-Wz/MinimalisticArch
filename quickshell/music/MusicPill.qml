@@ -72,8 +72,8 @@ Item {
             // Album art, falls back to the music note if there is no art or it fails to load
             Item {
                 id: artBox
-                width: 22
-                height: 22
+                width: 30
+                height: 30
                 anchors.verticalCenter: parent.verticalCenter
 
                 readonly property bool hasArt: art.status === Image.Ready
@@ -83,7 +83,7 @@ Item {
                     anchors.fill: parent
                     source: root.player && root.player.trackArtUrl ? root.player.trackArtUrl : ""
                     fillMode: Image.PreserveAspectCrop
-                    sourceSize: Qt.size(64, 64)
+                    sourceSize: Qt.size(500, 500)
                     asynchronous: true
                     smooth: true
                     visible: false
@@ -109,9 +109,10 @@ Item {
                 Text {
                     anchors.centerIn: parent
                     visible: !artBox.hasArt
-                    text: "♫"
+                    font.family: Theme.iconFont
+                    text: "󰎄"
                     color: Theme.blue
-                    font.pixelSize: 12
+                    font.pixelSize: 26
                 }
             }
 
@@ -139,6 +140,7 @@ Item {
                         width: titleClip.scrolling ? implicitWidth : titleClip.width
                         text: root.songTitle
                         color: Theme.fg
+                        font.family: Theme.iconFont
                         font.pixelSize: 11
                         font.weight: Font.DemiBold
                         elide: titleClip.scrolling ? Text.ElideNone : Text.ElideRight
@@ -171,6 +173,7 @@ Item {
                     width: parent.width
                     text: root.songArtist
                     color: Theme.fgDim
+                    font.family: Theme.iconFont
                     font.pixelSize: 9
                     elide: Text.ElideRight
                 }
@@ -194,6 +197,7 @@ Item {
 
                 Text {
                     anchors.centerIn: parent
+                    font.family: Theme.iconFont
                     text: "󰒮"
                     color: root.canPrev ? Theme.fgDim : Theme.muted
                     font.pixelSize: 18
@@ -232,6 +236,7 @@ Item {
 
                 Text {
                     anchors.centerIn: parent
+                    font.family: Theme.iconFont
                     text: "󰒭"
                     color: root.canNext ? Theme.fgDim : Theme.muted
                     font.pixelSize: 18

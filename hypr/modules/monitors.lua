@@ -13,8 +13,8 @@ hl.monitor({
 
 -- Laptop screen
 hl.monitor({
-    output   = "eDP-1",
-    mode     = "preferred",
+    output   = "DP-2",
+    mode     = "1920x1200@59.95Hz",
     position = "auto",
     scale    = "1.0",
     disabled = false

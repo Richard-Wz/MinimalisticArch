@@ -31,9 +31,43 @@ PopupPanel {
         }
     }
 
+    HoverButton {
+        id: clearBtn
+        visible: Clip.entries.length > 0
+        width: 30
+        height: 30
+        radius: Theme.radius - 2
+        anchors {
+            top: parent.top
+            right: parent.right
+            margins: 12
+        }
+        onClicked: {
+            if (typeof Clip.clear === "function") {
+                Clip.clear();
+            } else {
+                Clip.entries.slice().forEach(e => Clip.remove(e));
+            }
+        }
+
+        Text {
+            anchors.centerIn: parent
+            text: "\uDB82\uDDA7"   // nf-md-delete_sweep (U+F09A7)
+            color: Theme.red
+            font.family: Theme.iconFont
+            font.pixelSize: Theme.iconSize
+        }
+    }
+
     Rectangle {
         id: searchBox
-        anchors { top: parent.top; left: parent.left; right: parent.right; margins: 12 }
+        anchors {
+            top: parent.top
+            left: parent.left
+            right: clearBtn.visible ? clearBtn.left : parent.right
+            margins: 12
+            rightMargin: clearBtn.visible ? 6 : 12
+        }
         height: 30
         radius: Theme.radius - 2
         color: Theme.surface
@@ -57,6 +91,7 @@ PopupPanel {
                 text: "Search clipboard"
                 color: Theme.muted
                 font.pixelSize: Theme.fontSize - 1
+                font.family: Theme.iconFont
             }
         }
     }
@@ -93,9 +128,10 @@ PopupPanel {
             Text {
                 anchors { fill: parent; leftMargin: 10; rightMargin: 34 }
                 verticalAlignment: Text.AlignVCenter
-                text: row.modelData.isImage ? "[ image ]" : row.modelData.text
+                text: row.modelData.isImage ? "" : row.modelData.text
                 color: row.modelData.isImage ? Theme.muted : Theme.fg
                 font.pixelSize: Theme.fontSize - 1
+                font.family: Theme.iconFont
                 elide: Text.ElideRight
             }
 
@@ -124,5 +160,6 @@ PopupPanel {
         text: "Nothing here"
         color: Theme.muted
         font.pixelSize: Theme.fontSize - 1
+        font.family: Theme.iconFont
     }
 }

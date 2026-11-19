@@ -5,6 +5,7 @@ import qs
 Text {
     text: Qt.formatDateTime(clock.date, "dd:MM:yyyy | hh:mm AP")
     color: Theme.fg
+    font.family: Theme.iconFont
     font.pixelSize: Theme.fontSize
     font.weight: Font.Medium
 

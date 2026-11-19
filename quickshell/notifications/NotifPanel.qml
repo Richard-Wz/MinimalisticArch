@@ -25,6 +25,7 @@ PopupPanel {
             color: Theme.fg
             font.pixelSize: Theme.fontSize
             font.weight: Font.DemiBold
+            font.family: Theme.iconFont
         }
 
         Row {
@@ -94,6 +95,7 @@ PopupPanel {
         visible: Notifs.count === 0
         text: "No notifications"
         color: Theme.muted
+        font.family: Theme.iconFont
         font.pixelSize: Theme.fontSize - 1
     }
 }

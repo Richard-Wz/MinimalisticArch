@@ -22,7 +22,7 @@ HoverButton {
         } else {
             Audio.panelOpen = !Audio.panelOpen;
         }
-    } 
+    }
 
     onWheel: wheel => {
         if (!audio) return

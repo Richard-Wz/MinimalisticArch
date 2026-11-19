@@ -21,8 +21,10 @@ hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + Space", hl.dsp.exec_cmd(menu))
-hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
-hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("hyprlock"))
+hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit")) -- dwindle only
+hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("systemctl suspend"))
+hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ action = "toggle" }))
+-- hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("hyprlock"))
 hl.bind("ALT + P", hl.dsp.exec_cmd("qs ipc call projection toggle"))
 
 -- Default and not using
@@ -69,9 +71,7 @@ hl.bind("XF86AudioPlay",  hl.dsp.exec_cmd("playerctl play-pause"), { locked = tr
 hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd("playerctl previous"),   { locked = true })
 
 -- Screenshot
--- Full screen screenshot
--- hl.bind(mainMod .. " + P", hl.dsp.exec_cmd([[grim ~/Pictures/$(date +%Y-%m-%d-%H%M%S).png]]))
--- Region screenshot
--- hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd([[grim -g "$(slurp)" ~/Pictures/$(date +%Y-%m-%d-%H%M%S).png]]))   
+-- Fullscreen
 hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("hyprshot -m output"))
+-- Region
 hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd("hyprshot -m region"))

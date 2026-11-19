@@ -25,6 +25,7 @@ PopupPanel {
             text: "Bluetooth"
             color: Theme.fg
             font.pixelSize: Theme.fontSize
+            font.family: Theme.iconFont
             font.weight: Font.DemiBold
         }
 
@@ -111,5 +112,6 @@ PopupPanel {
             : "Looking for devices"
         color: Theme.muted
         font.pixelSize: Theme.fontSize - 1
+        font.family: Theme.iconFont
     }
 }

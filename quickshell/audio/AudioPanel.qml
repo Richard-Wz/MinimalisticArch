@@ -29,6 +29,7 @@ PopupPanel {
         text: "Sound"
         color: Theme.fg
         font.pixelSize: Theme.fontSize
+        font.family: Theme.iconFont
         font.weight: Font.DemiBold
     }
 
@@ -73,6 +74,7 @@ PopupPanel {
             text: Math.round(panel.vol * 100) + "%"
             color: panel.muted ? Theme.muted : Theme.fg
             font.pixelSize: Theme.fontSize
+            font.family: Theme.iconFont
         }
 
         Item {
@@ -137,6 +139,7 @@ PopupPanel {
         text: "OUTPUT"
         color: Theme.muted
         font.pixelSize: Theme.fontSize - 3
+        font.family: Theme.iconFont
         font.letterSpacing: 1
     }
 
@@ -168,5 +171,6 @@ PopupPanel {
         text: "No output devices"
         color: Theme.muted
         font.pixelSize: Theme.fontSize - 1
+        font.family: Theme.iconFont
     }
 }

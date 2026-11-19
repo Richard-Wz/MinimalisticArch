@@ -17,23 +17,12 @@
     }
   },
 
-  // Gif
-  // "logo": {
-  //   "type": "kitty",
-  //   "source": "/home/rj/Pictures/Pin/chisa.gif",
-  //   "width": 30,
-  //   "animationFrame": 0,
-  //   "padding": {
-  //     "right": 2
-  //   }
-  // },
-
   "logo": {
-    "type": "kitty",
-    "source": "/home/rj/Pictures/Pin/cat1.jpeg",
-    "width": 30,
+    "type": "kitty-icat",
+    "source": "$HOME/.config/fastfetch/profile.jpg",
+    "width": 36,
     "padding": {
-      "right": 2
+      "right": 4
     }
   },
 

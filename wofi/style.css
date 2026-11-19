@@ -86,3 +86,31 @@ window {
 #img {
     margin-right: 8px;
 }
+
+/* Remove white background from the expander's inner GTK list */
+#inner-box,
+#unselected,
+expander,
+expander list,
+list {
+    background-color: transparent;
+}
+
+expander list {
+    margin-top: 4px;
+    margin-left: 12px; /* Indents the sub-items slightly under Firefox */
+}
+
+/* Adjust spacing and padding of each inner item */
+#entry:selected #unselected #entry {
+    margin: 2px 0px;     /* Vertical gap between "New Window", "Private Window", etc. */
+    padding: 5px 10px;   /* Inner height and horizontal padding of each sub-item */
+    background-color: @bg_dark;
+    border: 1px solid transparent;
+    border-radius: 8px;
+}
+
+#entry:selected #unselected #entry:selected {
+    background-color: @surface;
+    border: 1px solid @blue;
+}

@@ -6,6 +6,7 @@ import qs
 import qs.music
 
 PanelWindow {
+    id: barWindow
     anchors {
         top: true
         left: true
@@ -36,13 +37,14 @@ PanelWindow {
         anchors.verticalCenter: parent.verticalCenter
         spacing: 4
 
+        TrayApps { Layout.alignment: Qt.AlignVCenter }
         NetButton { Layout.alignment: Qt.AlignVCenter }
         BtButton { Layout.alignment: Qt.AlignVCenter }
-        NotifButton { Layout.alignment: Qt.AlignVCenter }
         ClipButton { Layout.alignment: Qt.AlignVCenter }
         Volume {}
-        PowerMode {}
+        // PowerMode {}
+        NotifButton { Layout.alignment: Qt.AlignVCenter }
         PowerMenu {}
-        Battery {}
+        // Battery {}
     }
 }

@@ -22,7 +22,7 @@ Item {
             anchors.centerIn: parent
             anchors.verticalCenterOffset: 1
             anchors.horizontalCenterOffset: 1
-            text: "󰐥" 
+            text: "󰐥"
             font.family: Theme.iconFont
             font.pixelSize: Theme.iconSize + 1
             color: parent.hovered ? Theme.red : Theme.blue
@@ -68,6 +68,7 @@ Item {
                     color: Theme.muted
                     font.pixelSize: 10
                     font.weight: Font.DemiBold
+                    font.family: Theme.iconFont
                     Layout.leftMargin: 9
                     Layout.topMargin: 2
                     Layout.bottomMargin: 3
@@ -102,12 +103,14 @@ Item {
                                 text: modelData.icon
                                 color: modelData.color
                                 font.pixelSize: Theme.iconSize
+                                font.family: Theme.iconFont
                             }
 
                             Text {
                                 text: modelData.label
                                 color: modelData.danger ? Theme.red : Theme.fg
                                 font.pixelSize: Theme.fontSize
+                                font.family: Theme.iconFont
                                 Layout.fillWidth: true
                             }
                         }

@@ -14,7 +14,7 @@ Item {
     RowLayout {
         id: row
         anchors.left: parent.left
-        anchors.top: parent.top
+        anchors.verticalCenter: parent.verticalCenter
         spacing: 3
 
         Repeater {
@@ -52,6 +52,7 @@ Item {
                     color: ws.active ? Theme.blue
                          : ws.hovered ? Theme.cyan
                          : Theme.fgDim
+                    font.family: Theme.iconFont
                     font.pixelSize: Theme.fontSize
                     font.weight: ws.active ? Font.DemiBold : Font.Normal
 
@@ -68,7 +69,7 @@ Item {
         height: 2
         radius: 2
         color: Theme.blue
-        y: row.height
+        y: row.y + row.height + 1
 
         x: {
             void repeater.count

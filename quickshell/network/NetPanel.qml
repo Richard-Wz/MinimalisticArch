@@ -28,6 +28,7 @@ PopupPanel {
             text: "Network"
             color: Theme.fg
             font.pixelSize: Theme.fontSize
+            font.family: Theme.iconFont
             font.weight: Font.DemiBold
         }
 
@@ -101,6 +102,7 @@ PopupPanel {
                 text: "Ethernet connected"
                 color: Theme.fg
                 font.pixelSize: Theme.fontSize - 1
+                font.family: Theme.iconFont
             }
         }
     }
@@ -142,5 +144,6 @@ PopupPanel {
             : "Looking for networks"
         color: Theme.muted
         font.pixelSize: Theme.fontSize - 1
+        font.family: Theme.iconFont
     }
 }
