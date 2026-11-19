@@ -53,6 +53,9 @@ sudo yay -S bluez-tools
 // If got battery; else just remove the battery icon widget as mini pc power performance based on bios
 sudo pacman -S power-profiles-daemon
 sudo systemctl enable --now power-profiles-daemon.service
+sudo pacman -S python-gobject
+powerprofilectl list
+
 
 # ZSH shell
 sudo pacman -S zsh zsh-autosuggestions zsh-syntax-highlighting
@@ -136,3 +139,51 @@ Include = /etc/pacman.d/mirrorlist
 // save and run update command
 sudo pacman -Syyu
 
+
+# Dolphin customisation
+yay -S qt6ct-kde
+pacman -Q qt6ct-kde // validate
+mkdir -p ~/.local/share/color-schemes
+nano ~/.local/share/color-schemes/TokyoNight.colors
+
+
+[ColorScheme]
+Name=Tokyo Night
+ColorScheme=TokyoNight
+shadeSortColumn=true
+
+[Colors:Window]
+BackgroundNormal=26,27,38
+BackgroundAlternate=36,40,59
+ForegroundNormal=192,202,245
+ForegroundInactive=86,95,137
+ForegroundActive=125,207,255
+
+[Colors:View]
+BackgroundNormal=26,27,38
+BackgroundAlternate=36,40,59
+ForegroundNormal=192,202,245
+ForegroundInactive=86,95,137
+
+[Colors:Button]
+BackgroundNormal=36,40,59
+BackgroundAlternate=41,46,66
+ForegroundNormal=192,202,245
+
+[Colors:Selection]
+BackgroundNormal=122,162,247
+ForegroundNormal=26,27,38
+
+[Colors:Tooltip]
+BackgroundNormal=36,40,59
+ForegroundNormal=192,202,245
+
+[Colors:Header]
+BackgroundNormal=36,40,59
+ForegroundNormal=192,202,245
+
+[General]
+ColorScheme=TokyoNight
+Name=Tokyo Night
+
+qt6ct -> Under "Appearance", select "Color scheme: Tokyo Night (KColorScheme)"
