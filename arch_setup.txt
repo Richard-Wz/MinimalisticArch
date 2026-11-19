@@ -128,7 +128,6 @@ sudo nano /etc/conf.d/wireless-regdom
 // uncomment
 WIRELESS_REGDOM="MY"
 
-
 # multilib enable (can enable through installation)
 sudo nano /etc/pacman.conf
 // uncomment
@@ -137,39 +136,3 @@ Include = /etc/pacman.d/mirrorlist
 // save and run update command
 sudo pacman -Syyu
 
-sudo pacman -S steam
-11 for radeon
-sudo pacman -S --needed mesa lib32-mesa vulkan-radeon lib32-vulkan-radeon
-yay -S protonplus
-sudo pacman -S gamescope
-sudo pacman -S mangohud lib32-mangohud
-
-sudo pacman -S sqlite
-
-DB_PATH="$HOME/.local/share/Steam/steamapps/common/Wuthering Waves/Wuthering Waves Game/Client/Saved/LocalStorage/LocalStorage.db"
-INI_PATH="$HOME/.local/share/Steam/steamapps/common/Wuthering Waves/Wuthering Waves Game/Client/Saved/Config/WindowsNoEditor/GameUserSettings.ini"
-
-echo "=== LocalStorage.db ==="
-sqlite3 "$DB_PATH" "SELECT * FROM LocalStorage WHERE key LIKE '%Frame%' OR key LIKE '%Quality%' OR key LIKE '%Device%';"
-
-echo "=== GameUserSettings.ini ==="
-grep -i "FrameRate" "$INI_PATH"
-
-DB_PATH="$HOME/.local/share/Steam/steamapps/common/Wuthering Waves/Wuthering Waves Game/Client/Saved/LocalStorage/LocalStorage.db"
-INI_PATH="$HOME/.local/share/Steam/steamapps/common/Wuthering Waves/Wuthering Waves Game/Client/Saved/Config/WindowsNoEditor/GameUserSettings.ini"
-
-sqlite3 "$DB_PATH" "
-UPDATE LocalStorage SET value = '2' WHERE key = 'CustomFrameRate';
-UPDATE LocalStorage SET value = '0' WHERE key = 'AutoAdjustImageQuality';
-DROP TRIGGER IF EXISTS prevent_fps_reset;
-CREATE TRIGGER prevent_fps_reset
-AFTER UPDATE OF value ON LocalStorage
-WHEN NEW.key = 'CustomFrameRate' AND NEW.value != '2'
-BEGIN
-    UPDATE LocalStorage SET value = '2' WHERE key = 'CustomFrameRate';
-END;
-"
-
-sed -i 's/FrameRateLimit=.*/FrameRateLimit=60.000000/' "$INI_PATH"
-
-sqlite3 "$DB_PATH" "SELECT * FROM LocalStorage WHERE key = 'CustomFrameRate';" && grep -i "FrameRateLimit" "$INI_PATH"
