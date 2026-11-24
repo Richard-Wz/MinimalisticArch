@@ -24,7 +24,7 @@ hl.bind(mainMod .. " + Space", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit")) -- dwindle only
 hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("systemctl suspend"))
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ action = "toggle" }))
--- hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("hyprlock"))
+hl.bind(mainMod .. " + D", hl.dsp.exec_cmd("~/.config/hypr/scripts/dashboard.sh"))
 hl.bind("ALT + P", hl.dsp.exec_cmd("qs ipc call projection toggle"))
 
 -- Default and not using

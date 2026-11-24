@@ -33,14 +33,14 @@ hl.config({
 
     decoration = {
         -- Smooth, rounded window corners
-        rounding       = 10,
+        rounding       = 0,
         rounding_power = 2,
 
         active_opacity   = 1.0,
         inactive_opacity = 1.0,
 
         shadow = {
-            enabled      = true,
+            enabled      = false,
             range        = 20,
             render_power = 3,
 
@@ -58,6 +58,10 @@ hl.config({
 
     animations = {
         enabled = true,
+    },
+
+    cursor = {
+        no_hardware_cursors = true,
     },
 })
 

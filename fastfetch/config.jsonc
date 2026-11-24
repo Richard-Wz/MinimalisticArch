@@ -39,6 +39,7 @@
     },
     "gpu",
     "memory",
+    "swap",
     "disk",
     {
       "type": "battery",

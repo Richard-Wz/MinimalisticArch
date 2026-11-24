@@ -1,10 +1,10 @@
 -- See https://wiki.hypr.land/Configuring/Layouts/Dwindle-Layout/ for more
 hl.config({
     general = {
-        layout = "Dwindle"
+        layout = "dwindle"
     },
     dwindle = {
-        preserve_split = true, -- You probably want this
+        preserve_split = true,
     },
 })
 

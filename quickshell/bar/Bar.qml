@@ -42,9 +42,9 @@ PanelWindow {
         BtButton { Layout.alignment: Qt.AlignVCenter }
         ClipButton { Layout.alignment: Qt.AlignVCenter }
         Volume {}
-        // PowerMode {}
+        PowerMode {}
         NotifButton { Layout.alignment: Qt.AlignVCenter }
         PowerMenu {}
-        // Battery {}
+        Battery {}
     }
 }
